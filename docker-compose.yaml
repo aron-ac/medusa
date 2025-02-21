@@ -7,7 +7,7 @@ services:
     ports:
       - "9000:9000"
     environment:
-      - DATABASE_URL=postgres://medusa:medusa@db:5432/medusa
+      - DATABASE_URL=postgres://medusa:password@db:5432/medusa
       - REDIS_URL=redis://redis:6379
       - JWT_SECRET=supersecret
       - COOKIE_SECRET=supersecret
@@ -15,28 +15,21 @@ services:
     depends_on:
       - db
       - redis
-    volumes:
-      - medusa-data:/app/data
 
   db:
     image: postgres:15
     environment:
       - POSTGRES_USER=medusa
-      - POSTGRES_PASSWORD=medusa
+      - POSTGRES_PASSWORD=password
       - POSTGRES_DB=medusa
     volumes:
       - pgdata:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
 
   redis:
     image: redis:7
     volumes:
       - redisdata:/data
-    ports:
-      - "6379:6379"
 
 volumes:
   pgdata:
   redisdata:
-  medusa-data:
