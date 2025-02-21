@@ -7,7 +7,7 @@ RUN corepack enable && corepack prepare yarn@3.2.1 --activate
 # Copy package files and install with caching
 COPY package.json yarn.lock ./
 RUN yarn config set httpTimeout 120000 && \
-    yarn install --immutable --prefer-offline --verbose
+    yarn install --immutable --prefer-offline
 
 # Copy source and build
 COPY . .
